@@ -1,0 +1,16 @@
+#!/bin/bash
+CQFD=$(PATH="/usr/bin:/usr/local/bin" command -v cqfd)
+[ -z "$CQFD_EXTRA_RUN_ARGS" ] && CQFD_EXTRA_RUN_ARGS=""
+
+if [[ "$1" == "init" ]]; then
+  set -e
+  ${CQFD} init
+  ${CQFD} run npm install
+
+  exit $?
+fi
+
+CQFD_CALL_STRING="CQFD_EXTRA_RUN_ARGS=\"${CQFD_EXTRA_RUN_ARGS}\" ${CQFD} $*"
+
+bash -c "${CQFD_CALL_STRING}"
+
