@@ -9,6 +9,9 @@
 org='bidouilleur'
 name='test-nodegui'
 
+[pack]
+command='npx nodegui-packer --pack ./dist'
+
 [start]
 command='npm run start'
 
@@ -20,5 +23,6 @@ files=
 archive=
 
 flavors='
+	pack \
         start \
         '

@@ -3,8 +3,12 @@ FROM node:12.21.0-buster-slim
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y -q --no-install-recommends \
     build-essential \
     cmake \
+    file \
+    fuse \
     libdbus-1-3 \
+    libegl1 \
     libfontconfig1 \
+    libfuse2 \
     libgl1-mesa-glx \
     libxcb1 \
     libxkbcommon-x11-0 \
