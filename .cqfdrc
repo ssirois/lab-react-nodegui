@@ -10,11 +10,11 @@ org='bidouilleur'
 name='test-nodegui'
 
 [start]
-command='npm start'
+command='npm run start'
 
 ; [build] section must be last section
 [build]
-command=''
+command='npm run build'
 user_extra_groups=''
 files=
 archive=
