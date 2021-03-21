@@ -1,50 +1,61 @@
-import { Text, Window, hot, View } from "@nodegui/react-nodegui";
-import React from "react";
-import { QIcon } from "@nodegui/nodegui";
-import { StepOne } from "./components/stepone";
-import { StepTwo } from "./components/steptwo";
-import nodeguiIcon from "../assets/nodegui.jpg";
+import { Window, hot, View, Button } from '@nodegui/react-nodegui';
+import React from 'react';
+import { QDragMoveEvent, QMouseEvent, QIcon } from '@nodegui/nodegui';
+import nodeguiIcon from '../assets/nodegui.jpg';
+import { RNWidget } from '@nodegui/react-nodegui/dist/components/config';
 
 const minSize = { width: 500, height: 520 };
 const winIcon = new QIcon(nodeguiIcon);
-class App extends React.Component {
-  render() {
-    return (
-      <Window
-        windowIcon={winIcon}
-        windowTitle="Hello 👋🏽"
-        minSize={minSize}
-        styleSheet={styleSheet}
+
+const App: React.FC = () => {
+  const viewRef = React.useRef<RNWidget>();
+  React.useEffect(() => {
+    viewRef.current?.setAcceptDrops(true);
+    console.log('viewRef.acceptDrops: ', viewRef.current?.acceptDrops());
+  });
+
+  return (
+    <Window
+      windowIcon={winIcon}
+      windowTitle="Hello"
+      minSize={minSize}
+    >
+      <View style={viewStyle}
+        ref={viewRef}
+        on={{
+          DragEnter: (e) => {
+            console.log('DragEnter');
+            console.log(e);
+            const qEvent = new QDragMoveEvent(e);
+            qEvent.accept();
+          },
+          DragMove: (e) => {
+            console.log('DragMove');
+            console.log(e);
+          },
+          DragLeave: (e) => {
+            console.log('DragLeave');
+            console.log(e);
+          },
+          Drop: (e) => {
+            console.log('Drop');
+            console.log(e);
+          },
+          MouseMove: (e) => {
+            const mouseEvent = new QMouseEvent(e);
+            console.log('MouseMove: ', JSON.stringify({ x: mouseEvent.x(), y: mouseEvent.y() }, null, 2));
+          },
+        }}
       >
-        <View style={containerStyle}>
-          <Text id="welcome-text">Welcome to NodeGui 🐕</Text>
-          <Text id="step-1">1. Play around</Text>
-          <StepOne />
-          <Text id="step-2">2. Debug</Text>
-          <StepTwo />
-        </View>
-      </Window>
-    );
-  }
-}
+      </View>
+    </Window>
+  );
+};
 
-const containerStyle = `
-  flex: 1; 
-`;
-
-const styleSheet = `
-  #welcome-text {
-    font-size: 24px;
-    padding-top: 20px;
-    qproperty-alignment: 'AlignHCenter';
-    font-family: 'sans-serif';
-  }
-
-  #step-1, #step-2 {
-    font-size: 18px;
-    padding-top: 10px;
-    padding-horizontal: 20px;
-  }
+const viewStyle = `
+  flex: 1;
+  font-family: arial;
+  background: #0e1a40;
 `;
 
 export default hot(App);
