@@ -9,11 +9,20 @@
 org='bidouilleur'
 name='test-nodegui'
 
+[debug]
+command='npm run debug'
+
+[dev]
+command='./scripts/launch-dev-environment'
+
 [pack]
 command='npx nodegui-packer --pack ./dist'
 
 [start]
 command='npm run start'
+
+[watch]
+command='npm run dev'
 
 ; [build] section must be last section
 [build]
@@ -23,6 +32,9 @@ files=
 archive=
 
 flavors='
-	pack \
+        debug \
+        dev \
+        pack \
         start \
+        watch \
         '

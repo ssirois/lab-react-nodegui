@@ -14,5 +14,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y -q --no-
     libxkbcommon-x11-0 \
     mesa-common-dev \
     pkg-config \
+    screen \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 

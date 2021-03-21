@@ -9,7 +9,7 @@
     "build": "webpack -p",
     "dev": "webpack --mode=development",
     "start": "qode ./dist/index.js",
-    "debug": "qode --inspect ./dist/index.js"
+    "debug": "qode --inspect=0.0.0.0:9229 ./dist/index.js"
   },
   "dependencies": {
     "@nodegui/react-nodegui": "^0.10.2",
